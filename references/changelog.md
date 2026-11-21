@@ -1,12 +1,29 @@
-# TikTok 搜索、博主作品、视频评论 更新日志
+# TikTok每日热点搜索 更新日志
 
-## 1.1.1 - 2026-11-04
+## 1.1.3
+
+- 新增 `references/faq.md`；SKILL 写入 Windows cmd/PowerShell 双壳例与「cmd 只用双引号」。
+- CLI 支持 `--json-args`（与传统 flag 互斥；键名用 `keyword`/`url`/`sort` 等）；`parseCliArgs` 统一入口；SKILL/faq 补例。
+- 落盘开关统一为 `GUAIKEI_ENABLE_LOG=1` 或 CLI `--save`；废弃 `TT_GUAIKEI_ENABLE_LOG`。
+- `backendCodes`：在余额判断之后将裸 `errcode === 14` 稳定映射为 `PLAN_LIMIT`；搜索余额官方码 `16` 稳定映射为 `INSUFFICIENT_BALANCE`。
+- 按 path 区分接口：搜索侧裸 `errcode === 15` 不再标为余额不足（现行后端搜索余额为 16；查价失败为 1）；修正 `request.js` 过时注释。
+- 搜索侧裸 `errcode === 2`（插入失败）不再映射为 `RATE_LIMITED`；统一创建重试口径（注释 / readme：频控等稳定业务码不重试）。
+- stdout 信封顶层可选 `cost`（透传取数接口花费估算；错误省略）。
+
+## 1.1.2
+
+- 链接 tidy 首尾 scrub 补齐中文引号/书名号等，避免 `「」` 粘在 `@user/video/id` 后误判。
+- `finishSuccess` 先落盘再 drain stdout，再 stderr 提示后 `exit(0)`。
+- 错误码改为 errmsg 优先：`INSUFFICIENT_BALANCE`（搜索 16 / 作品评论 15）、`RATE_LIMITED`（含搜索频控 errcode 1）、`DAILY_LIMIT`（18）。
+- SKILL 不再要求 Agent 记裸数字 `"15"`/`"16"`。
+
+## 1.1.1
 
 - 明确套餐双上限：技能硬上限仍为 10000（按量）；包月 Token 搜索/作品最多 30、评论最多 40。
 - 后端 errcode `14` 映射为稳定 `PLAN_LIMIT`；Agent 禁止同参重试，可建议降 `--limit` 或升级套餐（须用户同意）。
 - 文档与示例同步：评论示例改为包月安全的 40，避免按「100 条」直接踩坑。
 
-## 1.1.0 - 2026-10-26
+## 1.1.0
 
 - 写明查询最长大约等 15 分钟，以及搜索 9 分钟、作品和评论 20 分钟的任务复用窗口。
 - 创建阶段最后一次失败不再打成「还要重试」。stderr 时间与信封一样用北京时间。
@@ -22,7 +39,7 @@
 - 关键词不合法退出码为 2。Token 缺失也输出 `AUTH_REQUIRED` JSON。
 - 成功结果默认不写文件。需要留底时设置 `TT_GUAIKEI_ENABLE_LOG=1`。
 
-## 1.0.0 - 2026-09-18
+## 1.0.0
 
 - tiktok-skill 技能首次发布。
 - 提供 TikTok 通用搜索功能，支持通过关键词搜索视频数据。
