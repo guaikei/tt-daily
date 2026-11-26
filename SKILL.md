@@ -6,6 +6,11 @@ name: tt-daily
 description: "TikTok公开数据每日热点搜索（只读）：关键词搜视频、博主作品、视频评论，输出 JSON，不登录不发布。触发词：TikTok、tiktok、抖音国际版、TikTok搜索、TikTok评论、TikTok博主。用户要查 TikTok 视频、评论、爆款选题、竞品监控、KOL 筛选或评论舆情时使用；抖音、小红书、快手、B站、微博、公众号不要用本技能。"
 license: MIT
 version: 1.1.3
+display_name: "TikTok每日热点搜索｜高赞排序·时间筛选·行业热点"
+display_name_en: "TikTok Daily"
+description_zh: "TikTok每日热点搜索数据源（只读）：关键词搜视频（相关度/最多点赞排序 + 近1日/近7日/近30日时间窗）、博主作品批量拉取（最新/最热排序）、视频评论与互动数据，输出结构化 JSON，供 AI 做当日热点速览、行业热点追踪、高赞内容分析、竞品内容策略与红人清单。不登录、不发布、不点赞、不评论、不关注。按量单次最多 1 万条；包月搜索 ≤30、作品 ≤30、评论 ≤40，超限返回 PLAN_LIMIT（退出码 1），降 --limit 或升级须用户同意后再跑。"
+description_en: "Read-only TikTok daily hot-search data source: keyword video search (relevance / most-liked sorting, 1-day / 7-day / 30-day windows), creator posts by profile URL or username (latest / hottest sorting), video comments with engagement data - structured JSON for daily hot-list overviews, industry trend tracking, top-liked content analysis, competitor content strategy and creator shortlists. No login, posting, liking, commenting or following. Pay-per-use caps at 10,000 items; monthly plans cap search at 30, works at 30 and comments at 40, returning PLAN_LIMIT (exit code 1) on breach - lower --limit or upgrade with user consent before retrying."
+author: "新郑市怪奇信息技术工作室"
 metadata:
   openclaw:
     emoji: "🎵"
